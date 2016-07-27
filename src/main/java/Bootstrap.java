@@ -1,12 +1,18 @@
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.io.IOException;
 import java.util.Scanner;
+
+
 
 /**
  * Created by Svitlana on 18.07.2016.
  */
 public class Bootstrap {
+    private Logger logger = Logger.getLogger(Bootstrap.class.getName());
+
     public static void main(String[] args) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application-context.xml");
         Bootstrap bootstrap = applicationContext.getBean("bootstrap", Bootstrap.class);
@@ -21,10 +27,21 @@ public class Bootstrap {
         System.out.println("Enter your expression, please, without spaces and brackets: ");
         Scanner scanner = new Scanner(System.in);
         String expression = scanner.next();
+        logger.info("New request: "+ expression);
         if (expression.contains("sqrt")){
             expression = expression.replaceAll("sqrt", "s");
         }
         System.out.println(calculatorWithOperations.returnResult(expression));
+        logger.info("Successful calculation");
     }
+
+//    private static void log() throws IOException {
+//
+//        Logger logger = Logger.getLogger("");
+//        FileHandler handler = new FileHandler("TestLog.log");
+//        handler.setLevel(Level.ALL);
+//        handler.setFormatter(new SimpleFormatter());
+//        logger.addHandler(handler);
+//    }
 
 }
