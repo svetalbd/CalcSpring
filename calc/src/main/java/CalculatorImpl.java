@@ -57,7 +57,8 @@ public class CalculatorImpl implements Calculator{
     }
 
     @Override
-    public String returnResult() {
+    public void returnResult(String expression) {
+        readExpression(expression);
         if (unaryOperation != null && secondVar.toString() != ""){
             result.append(unaryOperation.calculate(Double.valueOf(secondVar.toString())));
         } else if (binaryOperation != null && secondVar.toString() != ""){
@@ -66,6 +67,7 @@ public class CalculatorImpl implements Calculator{
             }
             result.append(binaryOperation.calculate(Double.valueOf(firstVar.toString()), Double.valueOf(secondVar.toString())));
         }
-        return result.toString();
+        System.out.println(result.toString());
+        //return result.toString();
     }
 }
